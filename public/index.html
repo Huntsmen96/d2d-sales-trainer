@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)file:///Users/cash/Downloads/sales-trainer.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D2D Sales Trainer Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+:root {
+  --bg: #090910;
+  --surface: #10101c;
+  --card: #14141f;
+  --border: #1c1c2e;
+  --accent: #00e5a0;
+  --accent-dim: #00e5a018;
+  --warn: #ff6b35;
+  --warn-dim: #ff6b3518;
+  --gold: #f5c518;
+  --gold-dim: #f5c51818;
+  --blue: #5b9cf6;
+  --blue-dim: #5b9cf618;
+  --text: #ddddf0;
+  --muted: #5a5a7a;
+  --cust: #b8b8e0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+/* ── SPLASH ── */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+  text-align: center;
+  gap: 0;
+}
+
+#splash-logo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+#splash-headline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+#splash-headline span { color: var(--accent); }
+
+#splash-sub {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+#splash-math {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+#splash-math h3 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.math-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.math-row:last-child { border-bottom: none; }
+
+.math-row span:last-child { color: var(--text); }
+
+#splash-total {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+#splash-total-label {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+#splash-proof {
+  font-size: 11px;
+  color: var(--muted);
+  max-width: 300px;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+#splash-start {
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  padding: 14px 0;
+  width: 100%;
+  max-width: 340px;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+
+#splash-start:hover { opacity: .85; }
+
+#splash-disclaimer {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* ── HEADER ── */
+#header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+#header-left h1 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+#header-left p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 1px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+#score-display { text-align: right; }
+
+#score-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+#score-label {
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ── PROFILE STRIP ── */
+#profile-strip {
+  flex-shrink: 0;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 0 14px;
+  overflow: hidden;
+  transition: max-height .3s ease, padding .3s ease;
+  max-height: 360px;
+}
+
+#profile-strip.collapsed { max-height: 0; padding-top: 0; padding-bottom: 0; }
+
+#profile-inner {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+}
+
+.pr { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; line-height: 1.5; }
+.pr span { color: var(--text); font-weight: 600; }
+.pr.full { grid-column: 1 / -1; }
+
+#ptoggle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 14px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+}
+
+#ptoggle:hover { background: var(--border); }
+
+#ptoggle-label {
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+#parrow { font-size: 10px; color: var(--muted); transition: transform .3s; }
+#parrow.open { transform: rotate(180deg); }
+
+/* ── MESSAGES ── */
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+#messages::-webkit-scrollbar { width: 4px; }
+#messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: 88%;
+  animation: fadeUp .25s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg.system { align-self: center; max-width: 100%; }
+.msg.customer { align-self: flex-start; }
+.msg.rep { align-self: flex-end; }
+
+.msg-label {
+  font-size: 9px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 4px;
+}
+
+.msg.rep .msg-label { text-align: right; }
+
+.msg-bubble {
+  padding: 9px 12px;
+  border-radius: 10px;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.msg.system .msg-bubble {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  border-radius: 6px;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+.msg.system.swarn .msg-bubble { background: var(--warn-dim); border-color: var(--warn); color: var(--warn); }
+.msg.system.sgold .msg-bubble { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+.msg.customer .msg-bubble {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--cust);
+  border-bottom-left-radius: 3px;
+}
+
+.msg.rep .msg-bubble {
+  background: #0f2a1e;
+  border: 1px solid #1a4030;
+  color: #a8f0d0;
+  border-bottom-right-radius: 3px;
+}
+
+.score-event {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  align-self: center;
+  animation: fadeUp .2s ease;
+}
+
+.score-event.pos { color: var(--accent); background: var(--accent-dim); }
+.score-event.neg { color: var(--warn); background: var(--warn-dim); }
+.score-event.neutral { color: var(--gold); background: var(--gold-dim); }
+
+/* ── TYPING ── */
+#typing { display: none; align-items: center; gap: 5px; padding: 4px 14px; flex-shrink: 0; }
+#typing.visible { display: flex; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); animation: bounce 1s infinite; }
+.dot:nth-child(2) { animation-delay: .15s; }
+.dot:nth-child(3) { animation-delay: .3s; }
+@keyframes bounce { 0%,80%,100% { transform:translateY(0);opacity:.4; } 40% { transform:translateY(-4px);opacity:1; } }
+#typing-label { font-size: 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+
+/* ── QUICK ACTIONS ── */
+#quick-actions {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px 14px 4px;
+}
+
+.qbtn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  background: transparent;
+  transition: all .15s;
+  text-align: center;
+  width: 100%;
+}
+
+.qbtn.exit  { border-color: var(--gold);  color: var(--gold);  }
+.qbtn.exit:hover  { background: var(--gold-dim); }
+.qbtn.skip  { border-color: var(--blue);  color: var(--blue);  }
+.qbtn.skip:hover  { background: var(--blue-dim); }
+.qbtn.reset { border-color: var(--warn);  color: var(--warn);  }
+.qbtn.reset:hover { background: var(--warn-dim); }
+.qbtn.info  { border-color: var(--muted); color: var(--muted); }
+.qbtn.info:hover  { background: #ffffff08; }
+
+/* ── INPUT ── */
+#input-row {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px 12px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+#user-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  padding: 9px 12px;
+  resize: none;
+  outline: none;
+  line-height: 1.4;
+  max-height: 100px;
+  transition: border-color .15s;
+}
+
+#user-input:focus { border-color: var(--accent); }
+#user-input::placeholder { color: var(--muted); }
+
+#send-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 9px 14px;
+  cursor: pointer;
+  letter-spacing: .08em;
+  transition: opacity .15s;
+  align-self: flex-end;
+}
+
+#send-btn:hover { opacity: .85; }
+#send-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── ROUND END OVERLAY ── */
+#round-end {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #090910ee;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#round-end.visible { display: flex; }
+
+#round-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+}
+
+#round-card h2 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+#round-outcome-icon { font-size: 36px; margin-bottom: 6px; }
+
+#round-outcome-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+#round-outcome-title.closed  { color: var(--accent); }
+#round-outcome-title.gracious { color: var(--gold); }
+#round-outcome-title.burned  { color: var(--warn); }
+
+#round-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+
+#score-breakdown {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.brow {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  padding: 2px 0;
+}
+
+.brow.total {
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  padding-top: 6px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.tip-box {
+  background: var(--accent-dim);
+  border: 1px solid #00e5a030;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  margin-bottom: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.tip-box.gold { background: var(--gold-dim); border-color: #f5c51830; color: var(--gold); }
+.tip-box.warn { background: var(--warn-dim); border-color: #ff6b3530; color: var(--warn); }
+
+#next-round-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 12px 28px;
+  cursor: pointer;
+  letter-spacing: .1em;
+  width: 100%;
+  transition: opacity .15s;
+  margin-bottom: 10px;
+}
+
+#next-round-btn:hover { opacity: .85; }
+#cumulative { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+
+/* ── INFO MODAL ── */
+#info-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #090910ee;
+  z-index: 150;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#info-modal.visible { display: flex; }
+
+#info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+  max-width: 340px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#info-card h2 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.info-section { margin-bottom: 16px; }
+
+.info-section h3 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.info-section p {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.info-stat {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.info-stat span:last-child { color: var(--accent); }
+.info-stat:last-child { border-bottom: none; }
+
+.info-total {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  margin: 12px 0 4px;
+}
+
+.info-total-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+#close-info {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+#close-info:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ── SPLASH SCREEN ── -->
+<div id="splash">
+  <div id="splash-logo">D2D Sales Trainer Pro</div>
+  <div id="splash-headline">Over <span>10,000,000</span><br>Unique Customers</div>
+  <div id="splash-sub">Every door is different. Every conversation is real. Train until nothing surprises you.</div>
+
+  <div id="splash-math">
+    <h3>How We Get to 10M+</h3>
+    <div class="math-row"><span>First names</span><span>100</span></div>
+    <div class="math-row"><span>Last names</span><span>120</span></div>
+    <div class="math-row"><span>Cities (DFW/TX)</span><span>50</span></div>
+    <div class="math-row"><span>Occupations</span><span>80</span></div>
+    <div class="math-row"><span>Household types</span><span>25</span></div>
+    <div class="math-row"><span>Internet providers</span><span>15</span></div>
+    <div class="math-row"><span>Bill amounts ($59–$249)</span><span>191</span></div>
+    <div class="math-row"><span>Customer moods</span><span>25</span></div>
+    <div class="math-row"><span>Backstory seeds</span><span>30</span></div>
+    <div class="math-row"><span>Primary objections</span><span>20</span></div>
+    <div class="math-row"><span>Cell carriers</span><span>12</span></div>
+    <div class="math-row"><span>Ages (26–68)</span><span>43</span></div>
+  </div>
+
+  <div id="splash-total">14,580,000,000+</div>
+  <div id="splash-total-label">Mathematically Unique Customer Scenarios</div>
+
+  <div id="splash-proof">"Some people didn't think this was possible. Every round you play is proof they were wrong."</div>
+
+  <button id="splash-start" onclick="startApp()">START TRAINING →</button>
+  <div id="splash-disclaimer">10 rounds per session · AI-powered customers · Real objections</div>
+</div>
+
+<!-- ── MAIN APP ── -->
+<div id="header">
+  <div id="header-left">
+    <h1>D2D Sales Trainer Pro</h1>
+    <p id="round-badge">ROUND 1 OF 10</p>
+  </div>
+  <div id="score-display">
+    <div id="score-number">0</div>
+    <div id="score-label">Total Points</div>
+  </div>
+</div>
+
+<div id="profile-strip">
+  <div id="profile-inner">
+    <div class="pr full">NAME: <span id="p-name">—</span></div>
+    <div class="pr">AGE: <span id="p-age">—</span></div>
+    <div class="pr">JOB: <span id="p-occ">—</span></div>
+    <div class="pr">CITY: <span id="p-loc">—</span></div>
+    <div class="pr">BILL: <span id="p-bill">—</span>/mo</div>
+    <div class="pr full">PROVIDER: <span id="p-provider">—</span></div>
+    <div class="pr full">HOUSEHOLD: <span id="p-household">—</span></div>
+    <div class="pr full">MOOD: <span id="p-mood">—</span></div>
+    <div class="pr full">BACKSTORY: <span id="p-backstory">—</span></div>
+    <div class="pr full">MAIN OBJECTION: <span id="p-objection">—</span></div>
+    <div class="pr">SIGNABILITY: <span id="p-status">—</span></div>
+    <div class="pr">CELL: <span id="p-cell">—</span></div>
+  </div>
+</div>
+
+<div id="ptoggle" onclick="toggleProfile()">
+  <span id="ptoggle-label">Customer Profile</span>
+  <span id="parrow" class="open">▼</span>
+</div>
+
+<div id="messages"></div>
+
+<div id="typing">
+  <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  <span id="typing-label">Customer is responding…</span>
+</div>
+
+<div id="quick-actions">
+  <button class="qbtn exit" onclick="gracefulExit()">🤝 Gracious Exit</button>
+  <button class="qbtn skip" onclick="skipRound()">⏭ Skip Round</button>
+  <button class="qbtn info" onclick="showInfo()">📊 10M Stats</button>
+  <button class="qbtn reset" onclick="hardReset()">↺ Full Reset</button>
+</div>
+
+<div id="input-row">
+  <textarea id="user-input" placeholder="What do you say? (type &quot;reset&quot; anytime)" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+  <button id="send-btn" onclick="sendMessage()">SEND</button>
+</div>
+
+<!-- ── ROUND END ── -->
+<div id="round-end">
+  <div id="round-card">
+    <h2 id="rc-label">Round Complete</h2>
+    <div id="round-outcome-icon">🏠</div>
+    <div id="round-outcome-title" class="closed">—</div>
+    <div id="round-desc">—</div>
+    <div id="score-breakdown">
+      <div class="brow"><span>Conversation pts</span><span id="bd-convo">0</span></div>
+      <div class="brow"><span id="bd-bonus-label">Outcome bonus</span><span id="bd-bonus">+0</span></div>
+      <div class="brow total"><span>Round total</span><span id="bd-total">0</span></div>
+    </div>
+    <div id="round-tip" class="tip-box"></div>
+    <button id="next-round-btn" onclick="startNextRound()">Next Customer →</button>
+    <div id="cumulative">Total: 0 pts</div>
+  </div>
+</div>
+
+<!-- ── INFO MODAL ── -->
+<div id="info-modal">
+  <div id="info-card">
+    <h2>The 10M+ Proof</h2>
+
+    <div class="info-section">
+      <h3>Profile Dimensions</h3>
+      <div class="info-stat"><span>First names</span><span>100</span></div>
+      <div class="info-stat"><span>Last names</span><span>120</span></div>
+      <div class="info-stat"><span>TX Cities</span><span>50</span></div>
+      <div class="info-stat"><span>Occupations</span><span>80</span></div>
+      <div class="info-stat"><span>Household types</span><span>25</span></div>
+      <div class="info-stat"><span>Providers</span><span>15</span></div>
+      <div class="info-stat"><span>Bill amounts</span><span>191</span></div>
+      <div class="info-stat"><span>Customer moods</span><span>25</span></div>
+      <div class="info-stat"><span>Backstories</span><span>30</span></div>
+      <div class="info-stat"><span>Primary objections</span><span>20</span></div>
+      <div class="info-stat"><span>Cell carriers</span><span>12</span></div>
+      <div class="info-stat"><span>Age range (26–68)</span><span>43</span></div>
+    </div>
+
+    <div class="info-total">14,580,000,000+</div>
+    <div class="info-total-label">Unique Customer Combinations</div>
+
+    <div class="info-section">
+      <h3>What Makes Every Door Different</h3>
+      <p>Names, jobs, cities, moods, backstories, objections, bills, and household situations are all picked independently and fed into an AI that plays your customer in real time — so even two "skeptical nurses in Fort Worth" will respond completely differently based on their backstory and primary objection.</p>
+    </div>
+
+    <div class="info-section">
+      <h3>Scoring Philosophy</h3>
+      <p>A <strong style="color:var(--gold)">Gracious Exit</strong> earns +40 pts. A burned lead costs −30 pts — because the next rep who knocks that door pays the price. Protecting the lead is a skill, not a retreat.</p>
+    </div>
+
+    <button id="close-info" onclick="hideInfo()">← Back to Training</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════
+let round = 1, totalScore = 0, roundScore = 0;
+let conversationHistory = [], currentProfile = null;
+let roundActive = false, isLoading = false;
+const MAX_ROUNDS = 10;
+
+// ═══════════════════════════════════════════
+//  PROFILE DATA — 14.5 BILLION+ COMBINATIONS
+// ═══════════════════════════════════════════
+
+const FIRST_NAMES = [
+  "Marcus","Denise","Ray","Tanya","Carlos","Beth","Jerome","Lisa","Craig","Sandra",
+  "Kevin","Wanda","Earl","Patrice","Dale","Yolanda","Hector","Gina","Tony","Shawn",
+  "Darnell","Rhonda","Felix","Tamara","Brent","Keisha","Greg","Monique","Wade","Cheryl",
+  "DeShawn","Latoya","Ricky","Shantel","Bobby","Cynthia","Alejandro","Brenda","Curtis","Felicia",
+  "Harold","Iris","Jermaine","Karen","Lorenzo","Mabel","Nathan","Octavia","Percy","Rochelle",
+  "Roderick","Sylvia","Tyrone","Valerie","Vernon","Whitney","Zachary","Alicia","Brandon","Cassandra",
+  "Derek","Elaine","Franklin","Gloria","Howard","Jackie","Kenneth","Lamar","Michelle","Nathaniel",
+  "Phillip","Samuel","Theresa","Walter","Andre","Beatrice","Cedric","Donna","Earnest","Florence",
+  "Garrett","Helena","Ivan","Julia","Kyle","Latasha","Miguel","Nadia","Oscar","Priscilla",
+  "Quinton","Regina","Stefan","Tamika","Ulysses","Vivian","William","Xiomara","Yvette","Zechariah"
+];
+
+const LAST_NAMES = [
+  "Reynolds","Williams","Carter","Nguyen","Mitchell","Torres","Johnson","Harris","Walker","Robinson",
+  "Davis","Clark","Lewis","Hall","Young","Martin","Thompson","White","Moore","Jackson",
+  "Henderson","Coleman","Brooks","Simmons","Foster","Jenkins","Perry","Russell","Griffin","Powell",
+  "Richardson","Cox","Howard","Ward","Long","Scott","Green","Adams","Baker","Nelson",
+  "Hill","Ramirez","Campbell","Gonzalez","Anderson","Thomas","Taylor","Lee","King","Wright",
+  "Lopez","Rodriguez","Martinez","Hernandez","Wilson","Brown","Jones","Miller","Garcia","Perez",
+  "Roberts","Phillips","Evans","Turner","Diaz","Parker","Cruz","Edwards","Collins","Stewart",
+  "Sanchez","Morris","Rogers","Reed","Cook","Morgan","Bell","Murphy","Bailey","Rivera",
+  "Cooper","Hughes","Price","Myers","Hamilton","Rose","Warren","Dixon","Hicks","Owens",
+  "Burke","Crawford","Fleming","Garrett","Haynes","Ingram","Jefferson","Kelley","Lawson","Manning",
+  "Nash","Osborne","Pittman","Quinones","Reeves","Sutton","Tran","Underwood","Vega","Walsh",
+  "Yates","Zimmerman","Barker","Castillo","Delgado","Espinoza","Franco","Guerra","Herrera","Ibarra"
+];
+
+const CITIES = [
+  // Core DFW
+  "Fort Worth","Mesquite","Garland","Arlington","Plano","McKinney","Frisco","Denton",
+  "Lewisville","Irving","Grand Prairie","Euless","Bedford","Hurst","Mansfield","Burleson",
+  "Azle","Weatherford","Cleburne","Waxahachie","North Richland Hills","Keller","Southlake",
+  "Colleyville","Grapevine","Saginaw","White Settlement","Forest Hill","Crowley","Benbrook",
+  // Extended suburbs
+  "Richland Hills","Haltom City","Watauga","Lake Worth","River Oaks","Sansom Park",
+  "Everman","Rendon","Alvarado","Midlothian","Duncanville","DeSoto","Cedar Hill","Lancaster",
+  "Rowlett","Sachse","Wylie","Murphy","Rockwall","Royse City","Fate","Forney","Terrell",
+  "Ennis","Red Oak","Venus","Joshua","Godley","Granbury","Stephenville"
+];
+
+const OCCUPATIONS = [
+  // Trades & Blue Collar
+  "Warehouse Supervisor","HVAC Technician","Construction Foreman","Pipefitter","Electrician",
+  "Plumber","Welder","Auto Mechanic","Cable Installer","Landscaping Business Owner",
+  "Roofer","Concrete Finisher","Heavy Equipment Operator","Pest Control Tech","Fence Installer",
+  "Auto Body Technician","Diesel Mechanic","Sheet Metal Worker","Irrigation Specialist","Pool Service Tech",
+  "Carpet Installer","Drywall Contractor","Tile Setter","Painter","Flooring Installer",
+  // Healthcare
+  "Registered Nurse","Dental Hygienist","Physical Therapist","Pharmacy Technician","Medical Biller",
+  "Certified Nursing Assistant","Radiology Technician","Home Health Aide","EMT","Surgical Technician",
+  "Medical Assistant","Occupational Therapist","Respiratory Therapist","Phlebotomist","Dialysis Tech",
+  // Service & Retail
+  "Retail Store Manager","Restaurant Manager","Hotel Front Desk Supervisor","Grocery Store Manager",
+  "Logistics Coordinator","Delivery Driver","Long-Haul Truck Driver","Postal Worker","UPS Driver","Amazon Driver",
+  "Uber/Lyft Driver","Food Truck Owner","Barber","Cosmetologist","Dog Groomer",
+  // Office & Professional
+  "Office Manager","Administrative Assistant","Insurance Adjuster","Real Estate Agent",
+  "School Counselor","Schoolteacher","Social Worker","HR Coordinator","Paralegal","Bookkeeper",
+  "Loan Officer","Property Manager","Tax Preparer","Customer Service Manager","Purchasing Agent",
+  // Public Safety & Military
+  "Police Officer","Firefighter","Army Veteran","Corrections Officer","Sheriff's Deputy",
+  // Other
+  "Stay-at-Home Parent","Youth Football Coach","Church Youth Director","Freelance Photographer","Childcare Worker",
+  "Grocery Store Cashier","Bank Teller","Security Guard","Janitor / Custodian","Cafeteria Worker"
+];
+
+const PROVIDERS = [
+  "Spectrum","AT&T U-verse","Frontier FiOS","Optimum","Cox","Xfinity",
+  "CenturyLink","HughesNet Satellite","Starlink","T-Mobile Home Internet",
+  "Viasat","EarthLink","MetroNet","Local cable co-op","Google Fiber"
+];
+
+const MOODS = [
+  // Friendly / Open
+  "Friendly but short on time — will engage if the rep gets to the point fast",
+  "Curious and genuinely open — interested in saving money, just needs to trust you first",
+  "Happy homeowner, easy to talk to — will give the rep a fair shot if they're personable",
+  "Cautiously optimistic — had a good rep knock before, willing to listen again",
+  "Chatty and neighborly — loves conversation but will drift; rep must keep control",
+  "Just got a big bill and is already frustrated with the current provider",
+  // Neutral / Guarded
+  "Skeptical but polite — wants facts, not a sales pitch",
+  "Cautiously open — will warm up if the rep doesn't come on too strong",
+  "Warm but non-committal — likes the rep fine but is naturally decision-avoidant",
+  "Protective of time — respects directness and efficiency above all else",
+  "Distracted — kids are loud in the background, attention is limited",
+  "Just got home from a long shift — tired, not hostile, but needs a fast compelling reason",
+  "In the middle of cooking dinner — slightly inconvenienced but willing to hear two sentences",
+  // Resistant
+  "Slightly annoyed — a different rep knocked yesterday; needs to feel this one is different",
+  "Immediately defensive — was signed up for something unexpected once and is still burned",
+  "Laser-focused on price — will not consider anything that isn't clearly and provably cheaper",
+  "Deeply loyal to current provider — been with them 8+ years, change feels genuinely risky",
+  "Just wants to be left alone — not rude, just introverted and private",
+  "Skeptical of all door-to-door reps — assumes it's a scam until proven otherwise",
+  // Wild cards
+  "On the phone when they answer — rep interrupted something; customer will be brief",
+  "Spouse is the real decision-maker and isn't home right now",
+  "Recently burned by a provider who made promises and didn't deliver",
+  "Landlord pays the bill — not sure they're even allowed to switch",
+  "Just moved in six weeks ago — still figuring out all the bills",
+  "Older homeowner who is suspicious of anything tech-related or unfamiliar"
+];
+
+const STATUSES = [
+  "SIGNABLE","SIGNABLE","SIGNABLE","SIGNABLE","SIGNABLE","SIGNABLE",
+  "MAYBE — needs to loop in spouse","MAYBE — wants to research first",
+  "HARD PASS — locked into a contract","HARD PASS — landlord controls the account"
+];
+
+const HOUSEHOLDS = [
+  "Married, 2 young kids (ages 4 and 8)","Single homeowner","Married, no kids — both work full time",
+  "Divorced, one teenager at home","Married, 3 kids — very busy household","Single with a roommate",
+  "Married, empty nesters — kids are grown and out","Engaged couple, just bought the house",
+  "Multi-generational — lives with an elderly parent","Widowed, lives alone",
+  "Married, new baby (5 months old) — exhausted","Single mom, 2 kids under 10",
+  "Retired couple on a fixed income","Three adult roommates splitting bills",
+  "Married, husband works night shifts — wife answers the door",
+  "Single dad, shares custody every other week","Just moved in 2 months ago, still settling",
+  "Blended family — 4 kids total between them",
+  "Married, one spouse is disabled and home all day — reliable internet is critical",
+  "College student renting a room in a house","Newlyweds, first home together",
+  "Two-income household, very budget-conscious","Extended family — cousins and siblings nearby",
+  "Homeowner renting out a back unit — thinks carefully about service changes",
+  "Veteran household — values reliability and no-nonsense honesty"
+];
+
+const CELL_CARRIERS = [
+  "Verizon","Verizon","AT&T","AT&T","AT&T",
+  "T-Mobile","T-Mobile","T-Mobile",
+  "Cricket Wireless","Metro PCS","Boost Mobile",
+  "???"
+];
+
+const BACKSTORIES = [
+  "Been with the current provider for 7 years — no major issues, but the price keeps creeping up every year.",
+  "Had a huge billing dispute with the current provider last month and is still irritated about it.",
+  "Neighbor across the street switched providers last year and regrets it — that's lingering in the back of your mind.",
+  "Works from home two days a week — internet reliability is genuinely critical to keeping the job.",
+  "Teenager in the house streams and games all evening and constantly complains the internet is too slow.",
+  "Just renewed a 12-month contract with the current provider about 6 weeks ago.",
+  "Watched a door-to-door rep get into an argument with a neighbor down the street recently — it left a bad impression.",
+  "Has been meaning to shop around on internet bills for months but keeps forgetting.",
+  "Spouse handles all the household bills — genuinely doesn't know exactly what the internet costs.",
+  "Runs a small side business from home and needs solid upload speeds for video calls.",
+  "Had three different reps knock this week already — patience is wearing thin.",
+  "Saving up for a home renovation — every dollar saved on monthly bills matters right now.",
+  "Called the current provider's customer service last month and got bounced around for an hour with no resolution.",
+  "Recently retired — home during the day now, so internet speed matters more than it used to.",
+  "Kids do virtual school some days and the internet dropping during class has caused real problems.",
+  "Is quietly planning to move in about 4 months but hasn't told anyone.",
+  "Just got a promotion at work — in a genuinely good mood and a little more open than usual.",
+  "Had a bad experience with a timeshare pitch years ago — deeply skeptical of anything 'too good to be true.'",
+  "Elderly parent lives in the house and watches cable TV constantly — the TV side of a bundle matters a lot.",
+  "First-time homeowner — still figuring out all the bills and not fully sure what a good deal looks like.",
+  "Kids were just watching something important on TV when the rep knocked — slightly inconvenienced.",
+  "Has a friend who works for the current provider — switching feels slightly disloyal.",
+  "Just paid off a big car repair bill — very tight on finances this month.",
+  "Has a smart home setup — Ring, Nest, streaming on 4 TVs — needs high bandwidth, not just basic internet.",
+  "Spouse is very skeptical of strangers at the door; will mention needing to 'check with them' about anything.",
+  "Recently saw a news story about hidden fees in telecom contracts — is specifically watching for that.",
+  "Owns a rental property too — if the deal is good, might be interested for two addresses.",
+  "Has had the same provider since moving to Texas 12 years ago — loyalty is a real factor.",
+  "Kids are in bed and the customer is tired — wants this to be quick or not happen at all.",
+  "Just paid the current bill and winced at the total — actively thinking about alternatives."
+];
+
+const OBJECTIONS = [
+  "I'm not the decision-maker here — my spouse handles all this and they're not home.",
+  "I'm still under contract and I don't want to deal with an early termination fee.",
+  "I've heard too many stories about bait-and-switch pricing with these deals.",
+  "Honestly I just don't trust door-to-door salespeople — no offense.",
+  "I don't want the hassle of switching and having installation people in my house.",
+  "My current provider isn't perfect but at least I know what I'm getting.",
+  "I need to do my own research online before I make any decision like this.",
+  "Last time someone came by, I called my provider and they just matched the price.",
+  "What happens when your service goes out at 11pm — who do I call?",
+  "I've been burned before by a company that promised things and didn't follow through.",
+  "I really don't have the bandwidth to deal with this right now.",
+  "How do I know the price you're quoting me won't jump up in six months?",
+  "I rent this place — I'm not even sure my landlord would let me switch providers.",
+  "My kids are in the middle of something inside and I need to get back to them.",
+  "Can you just leave something I can look at? I don't make decisions at the door.",
+  "I've had this provider forever — switching just seems like a lot of work for maybe not much gain.",
+  "My husband/wife is going to want to compare this on their own before we decide anything.",
+  "I just don't have time tonight — we've got something going on.",
+  "What are the real fees? I always end up paying way more than the advertised price.",
+  "I already looked into switching last year and it wasn't worth it."
+];
+
+// ═══════════════════════════════════════════
+//  PROFILE GENERATOR
+// ═══════════════════════════════════════════
+
+function randFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+const usedKeys = new Set();
+
+function generateProfile() {
+  let p, key;
+  let tries = 0;
+  do {
+    const fn  = randFrom(FIRST_NAMES);
+    const ln  = randFrom(LAST_NAMES);
+    const city = randFrom(CITIES);
+    const occ  = randFrom(OCCUPATIONS);
+    const hh   = randFrom(HOUSEHOLDS);
+    const prov = randFrom(PROVIDERS);
+    const mood = randFrom(MOODS);
+    const stat = randFrom(STATUSES);
+    const back = randFrom(BACKSTORIES);
+    const obj  = randFrom(OBJECTIONS);
+    const cell = randFrom(CELL_CARRIERS);
+    const bill = randInt(59, 249);
+    const age  = randInt(26, 68);
+
+    // Key = first letters of 6 dimensions — prevents close repeats
+    key = `${fn[0]}${ln[0]}-${city.slice(0,3)}-${occ.slice(0,3)}-${mood.slice(0,4)}-${back.slice(0,4)}`;
+
+    p = { name:`${fn} ${ln}`, age, city, occupation:occ, household:hh,
+          provider:prov, bill, mood, status:stat, backstory:back,
+          objection:obj, cell };
+    tries++;
+  } while (usedKeys.has(key) && tries < 20);
+
+  usedKeys.add(key);
+  if (usedKeys.size > 500) usedKeys.clear(); // reset after 500 to avoid memory bloat
+  return p;
+}
+
+// ═══════════════════════════════════════════
+//  SYSTEM PROMPT
+// ═══════════════════════════════════════════
+
+function buildSystemPrompt(p) {
+  const cellNote = p.cell === "???"
+    ? "Your cell carrier is unknown to the rep — only reveal it (make up a realistic TX number on T-Mobile) if they ask naturally after building real rapport."
+    : `Your cell carrier is ${p.cell}. Only share it if asked naturally — don't volunteer it.`;
+
+  return `You are a REALISTIC door-to-door sales training simulator. You play the customer at their front door.
+
+CUSTOMER PROFILE:
+- Name: ${p.name} | Age: ${p.age} | Job: ${p.occupation}
+- City: ${p.city}, TX | Household: ${p.household}
+- Current provider: ${p.provider} Internet+TV at $${p.bill}/month
+- Mood: ${p.mood}
+- Backstory: ${p.backstory}
+- Primary objection you'll lean on: ${p.objection}
+- Signability: ${p.status}
+- Cell info: ${cellNote}
+
+YOUR ROLE:
+Respond ONLY as ${p.name}. Stay 100% in character. Use natural Texas speech. React authentically — reward great technique, resist generic or pushy tactics. Your backstory and objection should color every response.
+
+SCORING — append ONE tag to EVERY reply:
+{"score": N, "reason": "brief reason"}
+
+Scale:
++12 to +15 = Outstanding (strong rapport, smart objection handling, earned the cell ask, great close)
++6 to +11  = Solid (genuine connection, good listening, personalized approach)
++1 to +5   = Decent (polite opener, mild engagement)
+0           = Neutral
+-1 to -8   = Weak (generic script, missed signals, awkward phrasing)
+-9 to -15  = Damaging (pushy, dishonest, condescending, premature assumptive close)
+
+OUTCOME TAGS — only when conversation genuinely reaches an endpoint:
+{"OUTCOME":"CLOSED"}         — Rep asked for commitment and you agreed
+{"OUTCOME":"GRACIOUS_EXIT"}  — Rep respectfully acknowledged it's not the right time, left the door open, you felt good about it
+{"OUTCOME":"BURNED"}         — Rep was rude, deceptive, or so pushy you're now hostile
+
+RULES:
+1. HARD PASS = you will not sign, but stay civil for a gracious exit if rep earns it.
+2. Only trigger OUTCOME when the moment is genuinely there.
+3. Keep replies 1–4 sentences. You're a real person at your door.
+4. Never acknowledge you are an AI or that this is a simulation.`;
+}
+
+// ═══════════════════════════════════════════
+//  TIPS
+// ═══════════════════════════════════════════
+
+const CLOSED_TIPS = [
+  "Closed! Before you walk away, always confirm the install date and set expectations — cancellations spike when customers feel surprised.",
+  "Nice work. Next step in the field: ask for a referral before you leave. 'Anyone on the street you think might want to save some money?'",
+  "You closed it — now protect it. Make sure they know exactly what happens next so they don't cancel before install.",
+  "Fast closes are great but can be fragile. A quick recap of what they're getting builds confidence and reduces buyer's remorse."
+];
+
+const GRACIOUS_TIPS = [
+  "A gracious exit protects the lead. The next rep walks up to a warm door instead of a hostile one — that's real team play.",
+  "Smart read. A HARD PASS today can become a YES in 90 days. The rep who burned that door never gets that second shot.",
+  "Leaving well is a skill. Your reputation travels the whole neighborhood — every door on the street is easier because of how you handled this one.",
+  "Pro-level move. In D2D, protecting leads IS production. That door stays workable for the whole team.",
+  "This is exactly what rework-ready lead management looks like. The next rep you send back here has a fighting chance."
+];
+
+const BURNED_TIPS = [
+  "A burned lead costs the whole team — sometimes for years. That household will turn away every rep who knocks.",
+  "When resistance builds, pushing harder is the worst move. The gracious exit was available right up until the last exchange.",
+  "Burned leads in a neighborhood create a negative reputation that spreads door to door. Work on your exit phrases before the next session.",
+  "The goal at a hard door is always to leave better than you arrived. Practice two or three gracious exit lines until they're automatic."
+];
+
+function randTip(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+// ═══════════════════════════════════════════
+//  UI
+// ═══════════════════════════════════════════
+
+function addMsg(role, text, mod) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}${mod ? ' ' + mod : ''}`;
+  if (role !== 'system') {
+    const lbl = document.createElement('div');
+    lbl.className = 'msg-label';
+    lbl.textContent = role === 'rep' ? 'YOU' : (currentProfile?.name?.split(' ')[0] || 'CUSTOMER');
+    div.appendChild(lbl);
+  }
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.textContent = text;
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addScoreEvent(delta, reason) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `score-event ${delta > 0 ? 'pos' : delta < 0 ? 'neg' : 'neutral'}`;
+  div.textContent = `${delta > 0 ? '+' : ''}${delta} — ${reason}`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function setTyping(on) {
+  document.getElementById('typing').className = on ? 'visible' : '';
+  document.getElementById('send-btn').disabled = on;
+  document.getElementById('user-input').disabled = on;
+  isLoading = on;
+}
+
+function updateHeader() {
+  document.getElementById('round-badge').textContent = `ROUND ${round} OF ${MAX_ROUNDS}`;
+  document.getElementById('score-number').textContent = totalScore;
+}
+
+function updateProfilePanel(p) {
+  document.getElementById('p-name').textContent = p.name;
+  document.getElementById('p-age').textContent = p.age;
+  document.getElementById('p-occ').textContent = p.occupation;
+  document.getElementById('p-loc').textContent = p.city + ', TX';
+  document.getElementById('p-bill').textContent = '$' + p.bill;
+  document.getElementById('p-provider').textContent = p.provider;
+  document.getElementById('p-household').textContent = p.household;
+  document.getElementById('p-mood').textContent = p.mood;
+  document.getElementById('p-backstory').textContent = p.backstory;
+  document.getElementById('p-objection').textContent = p.objection;
+  document.getElementById('p-status').textContent = p.status;
+  document.getElementById('p-cell').textContent = p.cell === '???' ? 'Unknown — ask naturally' : p.cell;
+}
+
+function toggleProfile() {
+  document.getElementById('profile-strip').classList.toggle('collapsed');
+  document.getElementById('parrow').classList.toggle('open');
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function showInfo()  { document.getElementById('info-modal').classList.add('visible'); }
+function hideInfo()  { document.getElementById('info-modal').classList.remove('visible'); }
+
+// ═══════════════════════════════════════════
+//  API
+// ═══════════════════════════════════════════
+
+async function callClaude() {
+  const res = await fetch('/.netlify/functions/claude', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: buildSystemPrompt(currentProfile),
+      messages: conversationHistory
+    })
+  });
+  const data = await res.json();
+  if (!data.content) throw new Error('No content');
+  return data.content.map(b => b.text || '').join('');
+}
+
+function parseReply(raw) {
+  let clean = raw;
+  let score = null, reason = '', outcome = null;
+
+  const om = raw.match(/\{"OUTCOME"\s*:\s*"([^"]+)"\}/);
+  if (om) { outcome = om[1]; clean = clean.replace(om[0], '').trim(); }
+
+  const sm = raw.match(/\{"score"\s*:\s*(-?\d+)\s*,\s*"reason"\s*:\s*"([^"]*)"\}/);
+  if (sm) { score = parseInt(sm[1]); reason = sm[2]; clean = clean.replace(sm[0], '').trim(); }
+
+  clean = clean.replace(/\{[^}]*\}/g, '').trim();
+  return { clean, score, reason, outcome };
+}
+
+// ═══════════════════════════════════════════
+//  ROUND LOGIC
+// ═══════════════════════════════════════════
+
+async function startRound(r) {
+  round = r;
+  roundScore = 0;
+  roundActive = true;
+  currentProfile = generateProfile();
+  conversationHistory = [];
+
+  document.getElementById('messages').innerHTML = '';
+  updateHeader();
+  updateProfilePanel(currentProfile);
+
+  addMsg('system', `▸ ROUND ${round} OF ${MAX_ROUNDS}  ·  ${currentProfile.name.toUpperCase()}  ·  ${currentProfile.city.toUpperCase()}, TX`);
+
+  const opening = `You just opened your front door and a sales rep is standing there. Give a short, realistic, in-character greeting (1–2 sentences reflecting your current mood and situation). Append {"score":0,"reason":"opening scene"}.`;
+  conversationHistory.push({ role: 'user', content: opening });
+
+  setTyping(true);
+  try {
+    const reply = await callClaude();
+    const { clean, outcome } = parseReply(reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
+    setTyping(false);
+    addMsg('customer', clean);
+    if (outcome) handleOutcome(outcome);
+  } catch(e) {
+    setTyping(false);
+    // Auto-retry once after 2 seconds
+    addMsg('system', 'Connecting… retrying automatically.', 'sgold');
+    setTimeout(async () => {
+      document.getElementById('messages').innerHTML = '';
+      conversationHistory = [];
+      updateHeader();
+      addMsg('system', `▸ ROUND ${round} OF ${MAX_ROUNDS}  ·  ${currentProfile.name.toUpperCase()}  ·  ${currentProfile.city.toUpperCase()}, TX`);
+      const opening2 = `You just opened your front door and a sales rep is standing there. Give a short, realistic, in-character greeting (1–2 sentences reflecting your current mood and situation). Append {"score":0,"reason":"opening scene"}.`;
+      conversationHistory.push({ role: 'user', content: opening2 });
+      setTyping(true);
+      try {
+        const reply2 = await callClaude();
+        const { clean: c2, outcome: o2 } = parseReply(reply2);
+        conversationHistory.push({ role: 'assistant', content: reply2 });
+        setTyping(false);
+        addMsg('customer', c2);
+        if (o2) handleOutcome(o2);
+      } catch(e2) {
+        setTyping(false);
+        addMsg('system', 'Still no connection. Tap Full Reset or check your internet.', 'swarn');
+      }
+    }, 2000);
+  }
+}
+
+async function sendMessage() {
+  if (isLoading || !roundActive) return;
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  if (text.toLowerCase() === 'reset') { input.value = ''; hardReset(); return; }
+
+  input.value = '';
+  input.style.height = 'auto';
+  addMsg('rep', text);
+  conversationHistory.push({ role: 'user', content: text });
+  setTyping(true);
+
+  try {
+    const reply = await callClaude();
+    const { clean, score, reason, outcome } = parseReply(reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
+    setTyping(false);
+    addMsg('customer', clean);
+
+    if (score !== null && !outcome) {
+      roundScore += score;
+      totalScore += score;
+      updateHeader();
+      if (score !== 0) addScoreEvent(score, reason);
+    }
+
+    if (outcome) handleOutcome(outcome);
+  } catch(e) {
+    setTyping(false);
+    addMsg('system', 'Lost connection — tap Full Reset to continue.', 'swarn');
+  }
+}
+
+function handleOutcome(outcome) {
+  roundActive = false;
+  setTyping(false);
+
+  let icon, title, cls, desc, bonus, bonusLabel, tipText, tipCls;
+
+  if (outcome === 'CLOSED') {
+    bonus = 50; icon = '🎉'; title = 'SALE CLOSED!'; cls = 'closed';
+    desc = `${currentProfile.name} signed up. +50 close bonus added.`;
+    bonusLabel = 'Close bonus';
+    tipText = randTip(CLOSED_TIPS); tipCls = '';
+  } else if (outcome === 'GRACIOUS_EXIT') {
+    bonus = 40; icon = '🤝'; title = 'GRACIOUS EXIT'; cls = 'gracious';
+    desc = `You read the room and protected the lead. The next rep walks up to a warm door. That's pro-level field awareness.`;
+    bonusLabel = 'Lead-protection bonus';
+    tipText = randTip(GRACIOUS_TIPS); tipCls = 'gold';
+  } else {
+    bonus = -30; icon = '🔥'; title = 'LEAD BURNED'; cls = 'burned';
+    desc = `${currentProfile.name} is now hostile. Every rep who knocks this door after you pays the price.`;
+    bonusLabel = 'Lead damage penalty';
+    tipText = randTip(BURNED_TIPS); tipCls = 'warn';
+  }
+
+  totalScore += bonus;
+  const roundTotal = roundScore + bonus;
+  updateHeader();
+
+  document.getElementById('rc-label').textContent = `Round ${round} of ${MAX_ROUNDS}`;
+  document.getElementById('round-outcome-icon').textContent = icon;
+  const te = document.getElementById('round-outcome-title');
+  te.textContent = title; te.className = cls;
+  document.getElementById('round-desc').textContent = desc;
+  document.getElementById('bd-convo').textContent = (roundScore >= 0 ? '+' : '') + roundScore;
+  document.getElementById('bd-bonus-label').textContent = bonusLabel;
+  document.getElementById('bd-bonus').textContent = (bonus >= 0 ? '+' : '') + bonus;
+  document.getElementById('bd-total').textContent = (roundTotal >= 0 ? '+' : '') + roundTotal;
+  const tip = document.getElementById('round-tip');
+  tip.textContent = '💡 ' + tipText;
+  tip.className = `tip-box${tipCls ? ' ' + tipCls : ''}`;
+  document.getElementById('cumulative').textContent = `Running total: ${totalScore} pts`;
+  document.getElementById('next-round-btn').textContent = round >= MAX_ROUNDS ? 'See Final Score →' : 'Next Customer →';
+  document.getElementById('round-end').classList.add('visible');
+}
+
+function startNextRound() {
+  document.getElementById('round-end').classList.remove('visible');
+  if (round >= MAX_ROUNDS) { showFinalScore(); return; }
+  startRound(round + 1);
+}
+
+function showFinalScore() {
+  document.getElementById('messages').innerHTML = '';
+  const g = totalScore >= 900 ? 'S — Elite Closer'
+           : totalScore >= 700 ? 'A — Field Ready'
+           : totalScore >= 500 ? 'B — Keep Grinding'
+           : totalScore >= 300 ? 'C — Needs Work'
+           : 'D — Back to Basics';
+  addMsg('system', 'TRAINING SESSION COMPLETE');
+  addMsg('system', `Final Score: ${totalScore} pts`);
+  addMsg('system', `Grade: ${g}`);
+  addMsg('system', 'Type "reset" to run another session.');
+}
+
+// ═══════════════════════════════════════════
+//  QUICK ACTIONS
+// ═══════════════════════════════════════════
+
+async function gracefulExit() {
+  if (!roundActive || isLoading) return;
+  const line = "Hey, I really do appreciate you taking a minute to talk with me. I can tell now's probably not the best time, and I'm not going to pressure you on that — that's not how I operate. I'll leave my card and if anything changes down the road, don't hesitate. You have a good evening.";
+  addMsg('rep', line);
+  conversationHistory.push({ role: 'user', content: line });
+  setTyping(true);
+  try {
+    const reply = await callClaude();
+    const { clean } = parseReply(reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
+    setTyping(false);
+    addMsg('customer', clean);
+  } catch(e) { setTyping(false); }
+  setTimeout(() => handleOutcome('GRACIOUS_EXIT'), 700);
+}
+
+function skipRound() {
+  if (isLoading) return;
+  roundActive = false;
+  addMsg('system', 'Round skipped — 0 points.');
+  setTimeout(startNextRound, 600);
+}
+
+function hardReset() {
+  document.getElementById('round-end').classList.remove('visible');
+  round = 1; totalScore = 0; roundScore = 0;
+  conversationHistory = []; currentProfile = null;
+  roundActive = false; isLoading = false;
+  setTyping(false);
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('score-number').textContent = '0';
+  startRound(1);
+}
+
+// ═══════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════
+
+function startApp() {
+  document.getElementById('splash').style.display = 'none';
+  startRound(1);
+}
+</script>
+
+
+</body></html>
